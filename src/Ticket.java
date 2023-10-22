@@ -13,10 +13,10 @@ public class Ticket implements Serializable {
         this.client = client;
         this.seats = seats;
         for(Seat<Character,Integer> seat: seats){
-            if(!viewing.checkIfViewingHasGivenSeat(seat.getKey(),seat.getValue()))
-                throw new RuntimeException("tried to reserve a seat that is not present in this viewing");
-            if(viewing.checkIfSeatTaken(seat.getKey(), seat.getValue()))
-                throw new RuntimeException("tried to reserve seat that is already taken");
+//            if(!viewing.checkIfViewingHasGivenSeat(seat.getKey(),seat.getValue()))
+//                throw new RuntimeException("tried to reserve a seat that is not present in this viewing. seat: " + seat);
+//            if(viewing.checkIfSeatTaken(seat.getKey(), seat.getValue()))
+//                throw new RuntimeException("tried to reserve seat that is already taken. seat: " + seat);
             viewing.reserveSeat(seat.getKey(),seat.getValue());
         }
         ticketPrice = viewing.getTicketPrice() * seats.size();

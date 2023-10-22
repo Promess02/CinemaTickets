@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Viewing implements Serializable {
 
@@ -73,6 +74,11 @@ public class Viewing implements Serializable {
         this.ticketPrice = ticketPrice;
     }
 
+    public void printSeats(){
+        System.out.println("Seats for viewing: " + Title + ". $ - free seat, X' - seat taken");
+        CinemaSeats.printSeatsMap(seats);
+    }
+
     public boolean checkIfSeatTaken(Character row, Integer seat){
         return seats.get(row).get(seat);
     }
@@ -83,20 +89,46 @@ public class Viewing implements Serializable {
     }
 
     public void reserveSeat(Character row, Integer seat){
-        seats.put(row, new HashMap<>());
         seats.get(row).put(seat, true);
     }
 
+
     @Override
     public String toString() {
-        return "Viewing{" +
+        return "Viewing: " +
                 "Title='" + Title + '\'' +
                 ", day=" + day.toString() +
                 ", date=" + date +
                 ", ageRequirement=" + ageRequirement.getName() +
-                ", room=" + room.getName() +
-                ", ticketPrice=" + ticketPrice +
-                '}';
+                ", ticketPrice=" + ticketPrice;
+    }
+    private class CinemaSeats {
+        public static void printSeatsMap(HashMap<Character, HashMap<Integer, Boolean>> seats) {
+            System.out.print("  ");
+            for (int i = 0; i < seats.get('A').size(); i++) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+
+            for (Map.Entry<Character, HashMap<Integer, Boolean>> entry : seats.entrySet()) {
+                Character row = entry.getKey();
+                HashMap<Integer, Boolean> seatMap = entry.getValue();
+                System.out.print(row + " ");
+                for (int i = 0; i < seats.size(); i++) {
+                    Boolean taken = seatMap.get(i);
+                    if (taken != null) {
+                        System.out.print(taken ? "X " : "$ ");
+                    } else {
+                        System.out.print("");  // '?' represents unknown state
+                    }
+                }
+                System.out.println();
+            }
+        }
     }
 }
+
+
+
+
  

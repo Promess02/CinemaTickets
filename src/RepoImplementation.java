@@ -18,10 +18,11 @@ public class RepoImplementation<V> implements Repo<V>{
     @Override
     public void addData(V entity) {
         if(index==0) {
-            map.put(0,entity);
+            map.put(0, entity);
+            index++;
             return;
         }
-        map.put(++index, entity);
+        map.put(index++, entity);
     }
 
     @Override
@@ -37,5 +38,20 @@ public class RepoImplementation<V> implements Repo<V>{
     @Override
     public int getNextGeneratedId() {
         return index++;
+    }
+
+    @Override
+    public void setAllData(List<V> data) {
+        for(int i=0;i<data.size();i++){
+            map.put(i, data.get(i));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "RepoImplementation{" +
+                "index=" + index +
+                ", map=" + map +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public enum Rooms {
+public enum Rooms implements Serializable {
     ROOM_A('A'), ROOM_B('B'), ROOM_C('C'), ROOM_D('D'), ROOM_E('E');
     final private Character name;
     private HashMap<Character, HashMap<Integer, Boolean>> seats;

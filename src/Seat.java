@@ -1,4 +1,6 @@
-public class Seat<K,V> {
+import java.io.Serializable;
+
+public class Seat<K,V> implements Serializable {
     private K key;
     private V value;
 
